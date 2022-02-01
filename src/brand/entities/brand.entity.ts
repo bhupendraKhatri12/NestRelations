@@ -11,7 +11,7 @@ name:string
 
 @Column()
 country:string
-
+ //there is a many to one relation but it is only derfined in Product Entity 
 }
 
 

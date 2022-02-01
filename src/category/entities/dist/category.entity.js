@@ -19,6 +19,9 @@ var Category = /** @class */ (function () {
         typeorm_1.OneToMany(function () { return product_entity_1["default"]; }, function (product) { return product.id; })
     ], Category.prototype, "productid");
     __decorate([
+        typeorm_1.Column()
+    ], Category.prototype, "parentCategoryId");
+    __decorate([
         typeorm_1.ManyToMany(function () { return tag_entity_1["default"]; }),
         typeorm_1.JoinTable()
     ], Category.prototype, "tags");

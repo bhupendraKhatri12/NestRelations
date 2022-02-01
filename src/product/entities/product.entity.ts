@@ -2,6 +2,8 @@ import Brand from "src/brand/entities/brand.entity";
 import Category from "src/category/entities/category.entity";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable } from "typeorm";
 import Tag from "../../tags/entities/tag.entity"
+import  Image from "../../image/entities/image.entity"
+
 
 @Entity("Product")
 class Product {
@@ -39,15 +41,18 @@ class Product {
     categoryid: Category
 
 
+    //There is realtionship with  a image Entity
+
+
     @Column()
     abv: string
 
     @Column()
-    createdAt: Date
+    createdAt: string
 
 
     @Column()
-    updatedAt: Date
+    updatedAt: string
 
 
 }

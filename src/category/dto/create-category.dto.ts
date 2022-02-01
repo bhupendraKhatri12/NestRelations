@@ -1,1 +1,7 @@
-export class CreateCategoryDto {}
+export class CreateCategoryDto {
+
+
+    
+    parentCategoryId: number;
+
+}

@@ -14,11 +14,16 @@ import { CategoryModule } from './category/category.module';
     port: 5433,
     username: 'postgres',
     password: 'qwerty',
+    migrations: ["./migration/*.js"],
+    cli: {
+      migrationsDir: "src/migration"
+  },
     database: 'todo',
+    // migrationsTableName: "",
+
     entities: ["dist/**/*.entity{.ts,.js}"],
-    synchronize:true
   }), ProductModule, TagsModule, BrandModule, ImageModule, CategoryModule],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

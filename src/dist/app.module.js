@@ -11,6 +11,11 @@ var common_1 = require("@nestjs/common");
 var app_controller_1 = require("./app.controller");
 var app_service_1 = require("./app.service");
 var typeorm_1 = require("@nestjs/typeorm");
+var product_module_1 = require("./product/product.module");
+var tags_module_1 = require("./tags/tags.module");
+var brand_module_1 = require("./brand/brand.module");
+var image_module_1 = require("./image/image.module");
+var category_module_1 = require("./category/category.module");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -22,10 +27,14 @@ var AppModule = /** @class */ (function () {
                     port: 5433,
                     username: 'postgres',
                     password: 'qwerty',
+                    migrations: ["./migration/*.js"],
+                    cli: {
+                        migrationsDir: "src/migration"
+                    },
                     database: 'todo',
-                    entities: ["dist/**/*.entity{.ts,.js}"],
-                    synchronize: true
-                })],
+                    // migrationsTableName: "",
+                    entities: ["dist/**/*.entity{.ts,.js}"]
+                }), product_module_1.ProductModule, tags_module_1.TagsModule, brand_module_1.BrandModule, image_module_1.ImageModule, category_module_1.CategoryModule],
             controllers: [app_controller_1.AppController],
             providers: [app_service_1.AppService]
         })
