@@ -20,11 +20,6 @@
       updatedAt: string
 
       
-
-
-
-
-
  }
 
 

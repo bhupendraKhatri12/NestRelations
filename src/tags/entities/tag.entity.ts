@@ -12,7 +12,7 @@ name:string;
  
 
 @Column()
-createdAt:Date
+createdAt:string
 
 @Column()
 updatedAt:string

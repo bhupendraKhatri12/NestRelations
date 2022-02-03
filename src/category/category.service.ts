@@ -6,7 +6,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpException, HttpStatus } from '@nestjs/common';
 
-import { threadId } from 'worker_threads';
 
 @Injectable()
 export class CategoryService {
@@ -15,7 +14,6 @@ export class CategoryService {
     @InjectRepository(Category) private categoryRepository: Repository<Category>
 
   ) {
-
   }
 
   //create new 

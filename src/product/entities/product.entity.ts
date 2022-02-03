@@ -41,17 +41,17 @@ class Product {
     categoryid: Category
 
 
-    //There is realtionship with  a image Entity
+    //There is relationship with  a image Entity
 
 
     @Column()
     abv: string
 
-    @Column()
+    @Column({nullable:true})
     createdAt: string
 
 
-    @Column()
+    @Column({nullable:true})
     updatedAt: string
 
 

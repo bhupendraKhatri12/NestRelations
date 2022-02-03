@@ -48,10 +48,10 @@ var Product = /** @class */ (function () {
         typeorm_1.Column()
     ], Product.prototype, "abv");
     __decorate([
-        typeorm_1.Column()
+        typeorm_1.Column({ nullable: true })
     ], Product.prototype, "createdAt");
     __decorate([
-        typeorm_1.Column()
+        typeorm_1.Column({ nullable: true })
     ], Product.prototype, "updatedAt");
     Product = __decorate([
         typeorm_1.Entity("Product")

@@ -27,12 +27,12 @@ var AppModule = /** @class */ (function () {
                     port: 5433,
                     username: 'postgres',
                     password: 'qwerty',
-                    migrations: ["./migration/*.js"],
-                    cli: {
-                        migrationsDir: "src/migration"
-                    },
+                    //   migrations: ["./migration/*.js"],
+                    //   cli: {
+                    //     migrationsDir: "src/migration"
+                    // },
                     database: 'todo',
-                    // migrationsTableName: "",
+                    migrationsTableName: "",
                     entities: ["dist/**/*.entity{.ts,.js}"]
                 }), product_module_1.ProductModule, tags_module_1.TagsModule, brand_module_1.BrandModule, image_module_1.ImageModule, category_module_1.CategoryModule],
             controllers: [app_controller_1.AppController],

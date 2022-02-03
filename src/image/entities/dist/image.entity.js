@@ -15,16 +15,16 @@ var Image = /** @class */ (function () {
         typeorm_1.PrimaryGeneratedColumn()
     ], Image.prototype, "id");
     __decorate([
-        typeorm_1.Column()
+        typeorm_1.Column({ nullable: true })
     ], Image.prototype, "created");
     __decorate([
-        typeorm_1.Column()
+        typeorm_1.Column({ nullable: true })
     ], Image.prototype, "updated");
     __decorate([
-        typeorm_1.Column()
+        typeorm_1.Column({ nullable: true })
     ], Image.prototype, "url");
     __decorate([
-        typeorm_1.Column()
+        typeorm_1.Column({ nullable: true })
     ], Image.prototype, "publicid");
     __decorate([
         typeorm_1.OneToMany(function () { return product_entity_1["default"]; }, function (product) { return product.id; })

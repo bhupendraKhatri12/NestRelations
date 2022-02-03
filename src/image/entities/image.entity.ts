@@ -8,17 +8,17 @@ class Image {
     @PrimaryGeneratedColumn()
     id: number
    
-    @Column()
+    @Column({nullable:true})
     created: Date
 
-    @Column()
+    @Column({nullable:true})
     updated: Date
 
 
-    @Column()
+    @Column({nullable:true})
     url: string
 
-    @Column()
+    @Column({nullable:true})
     publicid: string
 
 

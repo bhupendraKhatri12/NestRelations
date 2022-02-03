@@ -7,14 +7,11 @@ class Category {
     @PrimaryGeneratedColumn()
     id: number
 
+    @Column({nullable:true})
+    name:string  
 
     @OneToMany(() => Product, product => product.id)
-    productid: Product[];
-
-    
-    @Column()
-    parentCategoryId: number;
-
+    productid: Product[]
 
     @ManyToMany(() => Tag)
     @JoinTable()

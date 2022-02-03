@@ -2,6 +2,6 @@ export class CreateCategoryDto {
 
 
     
-    parentCategoryId: number;
-
+//     parentCategoryId: number;
+  name:string;
 }
