@@ -1,11 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, StreamableFile, Response } from '@nestjs/common';
 import { ImageService } from './image.service';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
+import { createReadStream } from 'fs';
+import { join } from 'path';
 
 @Controller('image')
 export class ImageController {
-  constructor(private readonly imageService: ImageService) {}
+  constructor(private readonly imageService: ImageService) { }
 
   @Post()
   create(@Body() createImageDto: CreateImageDto) {
@@ -16,6 +18,21 @@ export class ImageController {
   findAll() {
     return this.imageService.findAll();
   }
+
+
+  @Get("file")
+  returnimage(@Response({ passthrough: true }) res): StreamableFile {
+    const file = createReadStream(join(process.cwd(), './src/file.png'));
+
+    res.set({
+      'Content-Type': 'application/json',
+      'Content-Disposition': 'attachment; filename="file.png"',
+    });
+
+    return new StreamableFile(file);
+
+  }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {

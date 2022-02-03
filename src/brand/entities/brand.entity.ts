@@ -1,17 +1,17 @@
-import  {Entity,Column,PrimaryGeneratedColumn,ManyToMany,OneToMany,ManyToOne,JoinTable} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable } from "typeorm";
 
 
 @Entity("Brand")
 class Brand {
-@PrimaryGeneratedColumn()
-id:number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-@Column()
-name:string
+    @Column()
+    name: string
 
-@Column()
-country:string
- //there is a many to one relation but it is only derfined in Product Entity 
+    @Column()
+    country: string
+    //there is a many to one relation but it is only derfined in Product Entity 
 }
 
 

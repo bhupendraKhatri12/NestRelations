@@ -1,25 +1,25 @@
 import Product from "src/product/entities/product.entity";
-import  {Entity,Column,PrimaryGeneratedColumn,ManyToMany,OneToMany,ManyToOne,JoinTable} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable } from "typeorm";
 
 @Entity("Tag")
 class Tag {
-@PrimaryGeneratedColumn()
-id:number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
 
-@Column()
-name:string;
- 
-
-@Column()
-createdAt:string
-
-@Column()
-updatedAt:string
+    @Column()
+    name: string;
 
 
-@Column()
-userid:number
+    @Column()
+    createdAt: string
+
+    @Column()
+    updatedAt: string
+
+
+    @Column()
+    userid: number
 
 
 }
