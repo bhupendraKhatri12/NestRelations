@@ -7,8 +7,8 @@
      "cli": {
          "migrationsDir": "src/migration"
      },
-     "database": "newdb",
+     "database": "todo",
      "entities": ["dist/**/*.entity{.ts,.js}"],
-     "migrations": ["src/migration/*{.ts,.js}"],
-     "synchronize": false
+     "migrations": ["dist/migration/*{.ts,.js}"],
+     "synchronize": true
  }

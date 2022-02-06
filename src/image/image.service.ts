@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable ,HttpException,HttpStatus} from '@nestjs/common';
 import { CreateImageDto } from './dto/create-image.dto';
 import { UpdateImageDto } from './dto/update-image.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -28,8 +28,17 @@ constructor(  @InjectRepository(Image) private ImageRepository: Repository<Image
     return this.ImageRepository.findOne(id);
   }
 
-  update(id: number, updateImageDto: UpdateImageDto) {
-    return `This action updates a #${id} image`;
+  async  update(id: number, updateImageDto: UpdateImageDto) {
+ await this.ImageRepository.update(id,updateImageDto);
+const updatedImage  = await this.ImageRepository.findOne(id);
+
+if (updateImageDto)
+{
+  return updateImageDto;
+}
+throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+
+
   }
 
   remove(id: number) {

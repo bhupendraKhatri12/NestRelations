@@ -3,6 +3,7 @@ import Category from "src/category/entities/category.entity";
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable } from "typeorm";
 import Tag from "../../tags/entities/tag.entity"
 import  Image from "../../image/entities/image.entity"
+import { Exclude } from 'class-transformer';
 
 
 @Entity("Product")
@@ -12,6 +13,7 @@ class Product {
     id: number
 
     @Column()
+    @Exclude()
     skuNumber: number
 
     @ManyToOne(() => Brand, brand => brand.id)
@@ -54,6 +56,10 @@ class Product {
     @Column({nullable:true})
     updatedAt: string
 
+    
+    constructor(partial: Partial<Product>) {
+        Object.assign(this, partial);
+      }
 
 }
 export default Product;

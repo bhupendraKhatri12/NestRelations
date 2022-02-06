@@ -4,7 +4,7 @@ import { getManager } from "typeorm"
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Product from "./entities/product.entity"
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { ClassSerializerInterceptor, HttpException, HttpStatus, Injectable, UseInterceptors } from '@nestjs/common';
 
 @Injectable()
 export class ProductService {
@@ -17,6 +17,7 @@ export class ProductService {
     return newproduct;
   }
 
+  @UseInterceptors(ClassSerializerInterceptor)
 
   findAll() {
     return this.productrepo.find();
