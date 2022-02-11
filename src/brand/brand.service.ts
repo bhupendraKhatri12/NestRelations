@@ -9,14 +9,14 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 
 @Injectable()
 export class BrandService {
- constructor(
-  @InjectRepository(Brand) private BrandRepository: Repository<Brand>,
+  constructor(
+    @InjectRepository(Brand) private BrandRepository: Repository<Brand>,
 
- ){}
+  ) { }
 
 
   async create(createBrandDto: CreateBrandDto) {
-    const newbrand = await  this.BrandRepository.create(createBrandDto)
+    const newbrand = await this.BrandRepository.create(createBrandDto)
     await this.BrandRepository.save(newbrand);
 
 
@@ -24,7 +24,7 @@ export class BrandService {
   }
 
   findAll() {
-    return this.BrandRepository.find();
+    return this.BrandRepository.find({ relations: ['product'] });
   }
 
   findOne(id: number) {
@@ -33,22 +33,22 @@ export class BrandService {
 
   async update(id: number, updateBrandDto: UpdateBrandDto) {
 
-    await this.BrandRepository.update(id,updateBrandDto);
-    const  updatedBrand = await this.BrandRepository.findOne(id)
-  
-    if(updatedBrand)
-    {
+    await this.BrandRepository.update(id, updateBrandDto);
+    const updatedBrand = await this.BrandRepository.findOne(id)
+
+    if (updatedBrand) {
       return updatedBrand
     }
-    
+
 
     throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
   }
 
   async remove(id: number) {
 
- const BrandTodo = await this.BrandRepository.delete(id);
+    const BrandTodo = await this.BrandRepository.delete(id);
     if (!BrandTodo.affected) {
       throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
-    }  }
+    }
+  }
 }

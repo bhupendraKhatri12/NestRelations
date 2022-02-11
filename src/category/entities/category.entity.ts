@@ -7,15 +7,17 @@ class Category {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({nullable:true})
-    name:string  
+    @Column({ nullable: true })
+    name: string
 
-    @OneToMany(() => Product, product => product.id)
-    productid: Product[]
+    @OneToMany(() => Product, product => product.category)
+    product: Product[]
 
-    @ManyToMany(() => Tag)
+    //CAtegory Relationship
+    @ManyToMany(type => Tag,tag=>tag.category)
     @JoinTable()
     tags: Tag[]
+
 
 }
 

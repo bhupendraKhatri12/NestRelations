@@ -14,7 +14,6 @@ class Image {
     @Column({nullable:true})
     updated: Date
 
-
     @Column({nullable:true})
     url: string
 
@@ -22,12 +21,12 @@ class Image {
     publicid: string
 
 
-    @OneToMany(()=>Product,product => product.id)
-     productid:Product[]
+    @ManyToOne(type=>Product,product => product.id)
+     product:Product
 
 
 
-}
+    }
 
 
 export default Image

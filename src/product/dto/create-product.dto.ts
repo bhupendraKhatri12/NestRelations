@@ -1,3 +1,5 @@
+import Brand from "src/brand/entities/brand.entity";
+
  
  export  class CreateProductDto {
 
@@ -18,7 +20,10 @@
       createdAt: string
 
       updatedAt: string
+      
+     brandid:number
 
+     Tagid:number
       
  }
 

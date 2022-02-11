@@ -1,65 +1,77 @@
 import Brand from "src/brand/entities/brand.entity";
 import Category from "src/category/entities/category.entity";
-import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, OneToMany, ManyToOne, JoinTable, Generated, JoinColumn, TableForeignKey } from "typeorm";
 import Tag from "../../tags/entities/tag.entity"
-import  Image from "../../image/entities/image.entity"
+import Image from "../../image/entities/image.entity"
 import { Exclude } from 'class-transformer';
 
 
 @Entity("Product")
 class Product {
 
-    @PrimaryGeneratedColumn()
-    id: number
-
-    @Column()
-    @Exclude()
-    skuNumber: number
-
-    @ManyToOne(() => Brand, brand => brand.id)
-    Brandid: Brand
-
-    @ManyToMany(() => Tag)
-    @JoinTable()
-    tags: Tag[]
+  @PrimaryGeneratedColumn()
+  id: number
 
 
-    @Column()
-    countryOfOrigin: string;
-
-    @Column()
-    stateOfOrigin: string
-
-    @Column()
-    name: string
-
-    @Column()
-    description: string
-
-    @Column()
-    userid: number
-
-    @ManyToOne(() => Category, category => category.id)
-    categoryid: Category
+  @Column()
+  skuNumber: number
 
 
-    //There is relationship with  a image Entity
+  @Column()
+  counter: number
+
+  //Brand attribute
+
+  @ManyToOne(type => Brand, brand => brand.id)
+  brand: Brand
+
+  //Tag attribute
 
 
-    @Column()
-    abv: string
+  @ManyToMany(type => Tag, tag => tag.product)
+  @JoinTable()
+  tags: Tag[]
 
-    @Column({nullable:true})
-    createdAt: string
+  //User attribute 
+  @Column({ nullable: true })
+  user: string;
+
+  @Column()
+  countryOfOrigin: string;
+
+  @Column()
+  stateOfOrigin: string
 
 
-    @Column({nullable:true})
-    updatedAt: string
+  @Column()
+  name: string
 
-    
-    constructor(partial: Partial<Product>) {
-        Object.assign(this, partial);
-      }
+  @Column()
+  description: string
+
+  @Column()
+  userid: number
+
+  @ManyToOne(() => Category, category => category.id)
+  category: Category
+
+
+  //There is relationship with  a image Entity
+  @Column()
+  abv: string
+
+  @Column({ nullable: true })
+  createdAt: Date
+
+
+  @Column({ nullable: true })
+  updatedAt: Date
+
+  //Image Entity
+  @OneToMany(type => Image, image => image.product)
+  image: Image[]
+
+
 
 }
 export default Product;

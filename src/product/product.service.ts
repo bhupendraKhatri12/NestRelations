@@ -5,40 +5,90 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import Product from "./entities/product.entity"
 import { ClassSerializerInterceptor, HttpException, HttpStatus, Injectable, UseInterceptors } from '@nestjs/common';
+import { count } from 'console';
 
 @Injectable()
 export class ProductService {
 
-  constructor(@InjectRepository(Product) private productrepo: Repository<Product>) { }
+  constructor(@InjectRepository(Product) private productrepo: Repository<Product>) {
+  }
 
   async create(createProductDto: CreateProductDto) {
     const newproduct = await this.productrepo.create(createProductDto)
+    newproduct.createdAt = new Date();
+    newproduct.updatedAt = new Date();
+
     await this.productrepo.save(newproduct);
     return newproduct;
   }
 
-  @UseInterceptors(ClassSerializerInterceptor)
 
-  findAll() {
-    return this.productrepo.find();
+
+  async getBrand(id: number) {
+    // this.productrepo.createQueryBuilder("Product")
+    //     .leftJoinAndSelect("Product","brand")
+    //     .getMany()
+    try {
+
+      const Brand = await this.productrepo.findOne(id, { relations: ['brand','Tag'] });
+      return Brand.brand;
+    }
+    catch (err) {
+      throw new err;
+    }
+
   }
 
-  findOne(id: number) {
-    return this.productrepo.findOne(+id);
+
+  async findAll() {
+    const update = await this.productrepo.find({ relations: ['brand','tags'] });
+    for (let index = 0; index < update.length; index++) {
+      // if(update[index].counter >0)
+      // {
+      //   continue;
+      // }
+
+
+      //  if(update[index].Brand ==null)
+      //  {
+      //   update[index].Brand =="Not registered"
+      //  }
+
+
+      if (update[index].user == null) {
+        update[index].user = "User unknown"
+      }
+
+
+
+    }
+    const newupdate = update;
+    await this.productrepo.save(newupdate);
+
+    return update;
+  }
+
+  async findOne(id: number) {
+    const response = await this.productrepo.findOne(id);
+    if (!response) {
+      throw new HttpException('Product not found', 404);
+
+    }
+    return this.productrepo.findOne(id)
+
   }
 
 
 
   //update the record
   async update(id: number, updateProductDto: UpdateProductDto) {
-    await this.productrepo.update(id, updateProductDto);
-    const updatedProduct = await this.productrepo.findOne(id)
-    if (updatedProduct) {
-      return updatedProduct;
-    }
+    const found = await this.productrepo.findOneOrFail(id);
 
-    throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+    found.counter++
 
+    // await this.productrepo.save(updateProductDto);
+
+    return await this.productrepo.save({ ...found, ...updateProductDto });
 
   }
 
@@ -51,7 +101,7 @@ export class ProductService {
     }
     else {
 
-
+     return deleteProduct;
     }
 
   }

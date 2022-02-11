@@ -8,7 +8,8 @@
          "migrationsDir": "src/migration"
      },
      "database": "todo",
+     "migrationsTableName": "custom_migration_table",
      "entities": ["dist/**/*.entity{.ts,.js}"],
-     "migrations": ["dist/migration/*{.ts,.js}"],
+     "migrations": ["migration/*{.ts,.js}"],
      "synchronize": true
  }

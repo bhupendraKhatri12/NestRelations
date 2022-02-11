@@ -25,7 +25,7 @@ export class CategoryService {
   }
 
   findAll() {
-    return this.categoryRepository.find();
+    return this.categoryRepository.find({ relations: ['tags', 'product'] });
   }
 
   findOne(id: number) {
@@ -33,26 +33,21 @@ export class CategoryService {
   }
 
   async update(id: number, updateCategoryDto: UpdateCategoryDto) {
-     await this.categoryRepository.update(id,updateCategoryDto);
- 
-     const upatedcategory  = await this.categoryRepository.findOne(id);
 
-     if(upatedcategory)
-     {
-       return upatedcategory
-     }
-     
+    const upatedcategory = await this.categoryRepository.findOne(id);
+    await this.categoryRepository.save({...upatedcategory,...updateCategoryDto});
 
-
-     throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+    if (upatedcategory) {
+      return this.categoryRepository.findOne(id)
     }
+    throw new HttpException('Todo not found', HttpStatus.NOT_FOUND);
+  }
 
   async remove(id: number) {
     const deleteCategory = await this.categoryRepository.delete(id)
 
 
-    if(!deleteCategory)
-    {
+    if (!deleteCategory) {
       throw new HttpException('category  not found', HttpStatus.NOT_FOUND);
     }
   }

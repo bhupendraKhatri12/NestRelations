@@ -1,29 +1,27 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete,Version } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 @Controller('product')
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly productService: ProductService) { }
 
   @Post()
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
- 
-  @Version("1")
+
   @Get()
   findAll() {
     return this.productService.findAll();
   }
 
-  @Version("2")
-  @Get()
-  findAllV2() {
-    return "this is no version of product 2";
+@Get(':id/brand')
+  getBrand(@Param('id' )id:string):any
+  {
+return this.productService.getBrand(+id);
   }
-
 
   @Get(':id')
   findOne(@Param('id') id: string) {
