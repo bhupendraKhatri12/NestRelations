@@ -22,15 +22,15 @@ export class ProductService {
     return newproduct;
   }
 
+ 
 
-
+  //gret Brand
   async getBrand(id: number) {
     // this.productrepo.createQueryBuilder("Product")
     //     .leftJoinAndSelect("Product","brand")
     //     .getMany()
     try {
-
-      const Brand = await this.productrepo.findOne(id, { relations: ['brand','Tag'] });
+      const Brand = await this.productrepo.findOneOrFail(id, { relations: ['brand','tags'] });
       return Brand.brand;
     }
     catch (err) {
@@ -39,9 +39,44 @@ export class ProductService {
 
   }
 
+//category
+  async getCategory(id: number) {
+    // this.productrepo.createQueryBuilder("Product")
+    //     .leftJoinAndSelect("Product","brand")
+    //     .getMany()
+    try {
+
+      const category = await this.productrepo.findOneOrFail(id, { relations: ['brand','tags'] });
+      return category.tags;
+    }
+    catch (err) {
+      throw new err;
+    }
+
+  }
+
+
+  //Get Image
+  async getImage(id: number) {
+    // this.productrepo.createQueryBuilder("Product")
+    //     .leftJoinAndSelect("Product","brand")
+    //     .getMany()
+    try {
+
+      const image= await this.productrepo.findOneOrFail(id, { relations: ['brand','tags','image'] });
+      return image.image;
+    }
+    catch (err) {
+      throw new err;
+    }
+
+  }
+
+
+
 
   async findAll() {
-    const update = await this.productrepo.find({ relations: ['brand','tags'] });
+    const update = await this.productrepo.find({ relations: ['brand','tags','image','category'] });
     for (let index = 0; index < update.length; index++) {
       // if(update[index].counter >0)
       // {
@@ -69,12 +104,12 @@ export class ProductService {
   }
 
   async findOne(id: number) {
-    const response = await this.productrepo.findOne(id);
+    const response = await this.productrepo.findOne(id,{relations:['tags','brand']});
     if (!response) {
       throw new HttpException('Product not found', 404);
 
     }
-    return this.productrepo.findOne(id)
+    return this.productrepo.findOne(id, {relations:['tags','brand']})
 
   }
 

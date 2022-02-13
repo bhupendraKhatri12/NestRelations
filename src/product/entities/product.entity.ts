@@ -28,7 +28,7 @@ class Product {
   //Tag attribute
 
 
-  @ManyToMany(type => Tag, tag => tag.product)
+  @ManyToMany(type => Tag, tags => tags.id)
   @JoinTable()
   tags: Tag[]
 

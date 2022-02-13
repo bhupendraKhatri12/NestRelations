@@ -14,7 +14,7 @@ class Category {
     product: Product[]
 
     //CAtegory Relationship
-    @ManyToMany(type => Tag,tag=>tag.category)
+    @ManyToMany(type => Tag,tag=>tag.id)
     @JoinTable()
     tags: Tag[]
 

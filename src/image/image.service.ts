@@ -45,4 +45,20 @@ export class ImageService {
   remove(id: number) {
     return this.ImageRepository.delete(id);
   }
+
+
+
+  async getProduct(id: number) {
+    // this.productrepo.createQueryBuilder("Product")
+    //     .leftJoinAndSelect("Product","brand")
+    //     .getMany()
+    try {
+      const image = await this.ImageRepository.findOneOrFail(id, { relations: ['product'] });
+      return image.product;
+    }
+    catch (err) {
+      throw new err;
+    }
+
+  }
 }

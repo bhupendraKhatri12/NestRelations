@@ -28,7 +28,8 @@ import Tag from "src/tags/entities/tag.entity";
     
 
     brandid:number
-
+    
+    tagsid:number
 
 
 

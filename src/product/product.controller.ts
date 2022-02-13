@@ -17,10 +17,19 @@ export class ProductController {
     return this.productService.findAll();
   }
 
-@Get(':id/brand')
-  getBrand(@Param('id' )id:string):any
-  {
-return this.productService.getBrand(+id);
+  @Get(':id/brand')
+  getBrand(@Param('id') id: string): any {
+    return this.productService.getBrand(+id);
+  }
+
+  @Get(':id/category')
+  getCategory(@Param('id') id: string): any {
+    return this.productService.getCategory(+id);
+  }
+
+  @Get(':id/image')
+  getImage(@Param('id') id: string): any {
+    return this.productService.getImage(+id);
   }
 
   @Get(':id')

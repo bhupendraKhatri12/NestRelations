@@ -22,8 +22,8 @@ import Brand from "src/brand/entities/brand.entity";
       updatedAt: string
       
      brandid:number
-
-     Tagid:number
+     
+      tagsid:number
       
  }
 

@@ -20,12 +20,13 @@ class Tag {
     userid: number
 
 
-    @ManyToMany(type => Product, product => product.tags)
+    @ManyToMany(type => Product, product => product.id)
+    @JoinTable()
     product: Product[]
 
 
     //Tags relationsip
-    @ManyToMany(type => Category, category => category.id)
+    @ManyToMany(type => Category, category => category.tags)
     category: Category[]
 
 }

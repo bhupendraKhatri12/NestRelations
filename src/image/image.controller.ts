@@ -33,10 +33,14 @@ export class ImageController {
 
   }
 
-
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.imageService.findOne(+id);
+  }
+  
+  @Get(':id/product')
+  findProduct(@Param('id') id: string) {
+    return this.imageService.getProduct(+id);
   }
 
   @Patch(':id')
